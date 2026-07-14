@@ -1,19 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>OptiCrop - Result</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container mt-5">
-        <div class="card shadow p-5 text-center">
-            <h1 class="mb-3">🌱 Recommended Crop</h1>
-            <h2 class="text-success text-capitalize">{{ crop }}</h2>
-            <p class="text-muted mt-3">Based on the soil and environmental parameters you provided, this crop is best suited for maximum yield.</p>
-            <a href="/" class="btn btn-outline-success mt-4">Try Another Prediction</a>
+{% extends 'base.html' %}
+
+{% block title %}Result | OptiCrop{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow p-4 p-md-5 text-center result-card">
+                <div class="mb-4">
+                    <span class="badge rounded-pill bg-success-subtle text-success px-3 py-2">Recommended Crop</span>
+                </div>
+                <h1 class="mb-3">🌱 Your best match is</h1>
+                <h2 class="text-success text-capitalize display-5 fw-bold">{{ crop }}</h2>
+                <p class="text-muted mt-3 fs-5">Based on the soil and environmental parameters you provided, this crop is the strongest match for healthy growth and high yield potential.</p>
+                <div class="mt-4 d-flex justify-content-center gap-3 flex-wrap">
+                    <a href="/find-your-crop" class="btn btn-success px-4">Try Another Prediction</a>
+                    <a href="/about" class="btn btn-outline-success px-4">Learn About the Project</a>
+                </div>
+            </div>
         </div>
     </div>
-</body>
-</html>
+</div>
+{% endblock %}

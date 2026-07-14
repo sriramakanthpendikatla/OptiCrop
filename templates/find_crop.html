@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Find Your Crop | OptiCrop{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-9">
+            <div class="card shadow p-4 p-md-5">
+                <div class="text-center mb-4">
+                    <span class="badge rounded-pill bg-success-subtle text-success px-3 py-2">Prediction Form</span>
+                    <h1 class="mt-3">Find Your Best Crop</h1>
+                    <p class="text-muted">Enter the field conditions below to receive an intelligent crop recommendation.</p>
+                </div>
+
+                <form action="/predict" method="POST">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Nitrogen (N)</label>
+                            <input type="number" step="any" class="form-control" name="N" placeholder="e.g. 50" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Phosphorous (P)</label>
+                            <input type="number" step="any" class="form-control" name="P" placeholder="e.g. 50" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Potassium (K)</label>
+                            <input type="number" step="any" class="form-control" name="K" placeholder="e.g. 50" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Temperature (°C)</label>
+                            <input type="number" step="any" class="form-control" name="temperature" placeholder="e.g. 25" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Humidity (%)</label>
+                            <input type="number" step="any" class="form-control" name="humidity" placeholder="e.g. 70" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">pH Level</label>
+                            <input type="number" step="any" class="form-control" name="ph" placeholder="e.g. 6.5" required>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label fw-semibold">Rainfall (mm)</label>
+                            <input type="number" step="any" class="form-control" name="rainfall" placeholder="e.g. 200" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100 mt-4 py-2 fw-semibold">Recommend Crop</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

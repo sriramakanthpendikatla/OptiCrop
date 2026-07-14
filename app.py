@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request
 import pickle
-import numpy as np
 import pandas as pd
 
 app = Flask(__name__)
@@ -15,6 +14,14 @@ FEATURE_NAMES = ['N', 'P', 'K', 'temperature', 'humidity', 'ph', 'rainfall']
 @app.route('/')
 def home():
     return render_template('index.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/find-your-crop')
+def find_crop():
+    return render_template('find_crop.html')
 
 @app.route('/predict', methods=['POST'])
 def predict():
