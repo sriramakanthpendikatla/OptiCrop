@@ -1,13 +1,33 @@
+from pathlib import Path
 from flask import Flask, render_template, request
 import pickle
+import numpy as np
 import pandas as pd
 
 app = Flask(__name__)
 
+BASE_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = BASE_DIR.parent
+DATA_PREPROCESSING_DIR = PROJECT_DIR / 'data_preprocessing'
+NOTEBOOK_DIR = PROJECT_DIR.parent / 'notebook'
+
+
+def load_pickle(filename):
+    for candidate in [
+        BASE_DIR / filename,
+        DATA_PREPROCESSING_DIR / filename,
+        NOTEBOOK_DIR / filename,
+    ]:
+        if candidate.exists():
+            with candidate.open('rb') as f:
+                return pickle.load(f)
+    raise FileNotFoundError(f'Could not find {filename} in expected locations')
+
+
 # Load model, scaler, label encoder
-model = pickle.load(open('model.pkl', 'rb'))
-scaler = pickle.load(open('scaler.pkl', 'rb'))
-label_encoder = pickle.load(open('label_encoder.pkl', 'rb'))
+model = load_pickle('model.pkl')
+scaler = load_pickle('scaler.pkl')
+label_encoder = load_pickle('label_encoder.pkl')
 
 FEATURE_NAMES = ['N', 'P', 'K', 'temperature', 'humidity', 'ph', 'rainfall']
 
@@ -34,9 +54,13 @@ def predict():
     ph = float(request.form['ph'])
     rainfall = float(request.form['rainfall'])
 
-    # Prepare input as DataFrame (fixes feature-name warning)
+    # Prepare input as DataFrame (match the training preprocessing)
     input_data = pd.DataFrame([[N, P, K, temperature, humidity, ph, rainfall]],
                                columns=FEATURE_NAMES)
+
+    # Match the training notebook: log-transform K before scaling
+    input_data['K'] = np.log1p(input_data['K'])
+
     input_scaled = scaler.transform(input_data)
 
     # Predict
