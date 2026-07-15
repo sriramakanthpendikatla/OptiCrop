@@ -7,24 +7,17 @@ import pandas as pd
 app = Flask(__name__)
 
 BASE_DIR = Path(__file__).resolve().parent
-PROJECT_DIR = BASE_DIR.parent
-DATA_PREPROCESSING_DIR = PROJECT_DIR / 'data_preprocessing'
-NOTEBOOK_DIR = PROJECT_DIR.parent / 'notebook'
 
 
 def load_pickle(filename):
-    for candidate in [
-        BASE_DIR / filename,
-        DATA_PREPROCESSING_DIR / filename,
-        NOTEBOOK_DIR / filename,
-    ]:
-        if candidate.exists():
-            with candidate.open('rb') as f:
-                return pickle.load(f)
-    raise FileNotFoundError(f'Could not find {filename} in expected locations')
+    path = BASE_DIR / filename
+    if not path.exists():
+        raise FileNotFoundError(f'Required file not found: {path}')
+    with path.open('rb') as f:
+        return pickle.load(f)
 
 
-# Load model, scaler, label encoder
+# Load model, scaler, and label encoder from the Flask app folder only
 model = load_pickle('model.pkl')
 scaler = load_pickle('scaler.pkl')
 label_encoder = load_pickle('label_encoder.pkl')
@@ -66,6 +59,8 @@ def predict():
     # Predict
     prediction = model.predict(input_scaled)
     predicted_crop = label_encoder.inverse_transform(prediction)[0]
+    with open(BASE_DIR / 'prediction_debug.txt', 'w', encoding='utf-8') as f:
+        f.write(f'INPUT: {input_data.to_dict(orient="records")[0]}\nPREDICTED_CROP: {predicted_crop}\n')
 
     return render_template('result.html', crop=predicted_crop)
 

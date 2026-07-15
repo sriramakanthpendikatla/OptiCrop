@@ -1,0 +1,2 @@
+INPUT: {'N': 19.0, 'P': 4.0, 'K': 3.2188758248682006, 'temperature': 32.0, 'humidity': 0.98, 'ph': 6.5, 'rainfall': 200.9}
+PREDICTED_CROP: mango
