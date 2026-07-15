@@ -5,9 +5,9 @@ import pandas as pd
 app = Flask(__name__)
 
 # Load model, scaler, label encoder
-model = pickle.load(open('model/model.pkl', 'rb'))
-scaler = pickle.load(open('model/scaler.pkl', 'rb'))
-label_encoder = pickle.load(open('model/label_encoder.pkl', 'rb'))
+model = pickle.load(open('model.pkl', 'rb'))
+scaler = pickle.load(open('scaler.pkl', 'rb'))
+label_encoder = pickle.load(open('label_encoder.pkl', 'rb'))
 
 FEATURE_NAMES = ['N', 'P', 'K', 'temperature', 'humidity', 'ph', 'rainfall']
 
