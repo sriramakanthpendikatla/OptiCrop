@@ -102,7 +102,6 @@ OptiCrop/
 │   │   ├── model.pkl                   # Trained Logistic Regression model
 │   │   ├── scaler.pkl                  # Fitted StandardScaler
 │   │   ├── label_encoder.pkl           # Fitted LabelEncoder for crop names
-│   │   ├── requirements.txt
 │   │   ├── static/
 │   │   │   └── style.css               # Frontend styling
 │   │   └── templates/
@@ -118,16 +117,19 @@ OptiCrop/
 │   ├── visualization_analisys/
 │   │   └── visualization.ipynb         # EDA & visualization notebook
 │   ├── opticrop_architecture.png       # System architecture diagram
+│   ├── screenshot_home.png             # Home page screenshot
+│   ├── screenshot_result.png           # Prediction result screenshot
+│   ├── requirements.txt
+│   ├── .env.example
 │   ├── Project Executable Files.pdf
 │   └── Sample Project Documentation.pdf
 ├── 8.Project Demonstration/
-│   ├── Communication_TEMPLATE.md
-│   ├── Project_Demo_Planning_TEMPLATE.md
-│   ├── Scalability_Future_Plan_TEMPLATE.md
-│   └── Team_Involvement_TEMPLATE.md
-├── notebook/
-│   └── OptiCrop_Model.ipynb            # Full EDA, modeling, clustering, and conclusion
-└── requirements.txt                     # Root-level dependencies for running the app
+│   ├── Communication.md
+│   ├── Project Demo Planning.md
+│   ├── Scalability & Future Plan.md
+│   └── Team Involvement in Demonstration.md
+└── notebook/
+    └── OptiCrop_Model.ipynb            # Full EDA, modeling, clustering, and conclusion
 ```
 
 ---
@@ -151,7 +153,7 @@ source venv/bin/activate      # On Windows: venv\Scripts\activate
 **3️⃣ Install dependencies**
 
 ```bash
-pip install -r requirements.txt
+pip install -r "7.Project Documentation/requirements.txt"
 ```
 
 **4️⃣ Run the web app**
@@ -166,14 +168,16 @@ python app.py
 Then open **`http://127.0.0.1:5000`** in your browser, enter soil/climate values, and get
 your crop recommendation. 🌾
 
-**5️⃣ (Optional) Explore the notebook**
+**5️⃣ (Optional) Explore the notebooks**
 
 ```bash
 jupyter notebook notebook/OptiCrop_Model.ipynb
 ```
 
 This walks through data cleaning, EDA, outlier handling, seasonal grouping, model
-training/evaluation, K-Means clustering, and the project conclusion.
+training/evaluation, K-Means clustering, and the project conclusion. The split
+`data_preprocessing/preprocessing.ipynb` and `visualization_analisys/visualization.ipynb`
+under `7.Project Documentation/` cover the corresponding sections individually.
 
 ---
 
